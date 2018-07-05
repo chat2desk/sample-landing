@@ -13,6 +13,9 @@
     }
     .reset {
         height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .panel-login>.panel-heading {
         color: #00415d;
@@ -217,12 +220,10 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-login" id="panel-reset" style="display: none;">
+            <div class="panel panel-login" id="panel-reset" style="display: block;">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center reset">
-                            Password reset
-                        </div>
+                    <div class="reset">
+                        Password reset
                     </div>
                 </div>
             </div>
@@ -243,7 +244,7 @@
                 return decodeURIComponent(results[2].replace(/\+/g, " "));
             }
 
-            var apiUrl = 'https://web.chat2desk.com/api'
+            var apiUrl = 'https://web.chat2desk.com'
             var secretKey = getParameterByName('hash');
 
             if (secretKey) {
@@ -258,7 +259,7 @@
                 e.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: apiUrl + '/user/sign_up',
+                    url: apiUrl + '/api/user/sign_up',
                     contentType: "application/json; charset=UTF-8",
                     dataType: 'json',
                     data: JSON.stringify({
@@ -269,7 +270,7 @@
                     }),
                     success: function (response) {
                         if (response.status === 'success') {
-                            location.href = 'https://web.chat2desk.com?auth_key=' + response.auth_key
+                            location.href = apiUrl + '?auth_key=' + response.auth_key
                         } else {
                             console.error('response', response)
                         }
@@ -281,7 +282,7 @@
                 e.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: apiUrl + '/user/sign_in',
+                    url: apiUrl + '/api/user/sign_in',
                     contentType: "application/json; charset=UTF-8",
                     dataType: 'json',
                     data: JSON.stringify({
@@ -290,7 +291,7 @@
                     }),
                     success: function (response) {
                         if (response.status === 'success') {
-                            location.href = 'https://web.chat2desk.com?auth_key=' + response.auth_key
+                            location.href = apiUrl + '?auth_key=' + response.auth_key
                         } else {
                             console.error('response', response)
                         }
@@ -301,7 +302,7 @@
                 e.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: apiUrl + '/user/reset_password',
+                    url: apiUrl + '/api/user/reset_password',
                     contentType: "application/json; charset=UTF-8",
                     dataType: 'json',
                     data: JSON.stringify({
@@ -323,7 +324,7 @@
                 e.preventDefault();
                 $.ajax({
                     method: 'POST',
-                    url: apiUrl + '/user/change_password',
+                    url: apiUrl + '/api/user/change_password',
                     contentType: "application/json; charset=UTF-8",
                     dataType: 'json',
                     data: JSON.stringify({
@@ -333,7 +334,7 @@
                     }),
                     success: function (response) {
                         if (response.status === 'success') {
-                            location.href = 'https://web.chat2desk.com?auth_key=' + response.auth_key
+                            location.href = apiUrl + '?auth_key=' + response.auth_key
                         } else {
                             console.error('response', response)
                         }
