@@ -244,7 +244,7 @@
                 return decodeURIComponent(results[2].replace(/\+/g, " "));
             }
 
-            var apiUrl = 'https://web.chat2desk.com'
+            var apiUrl = 'https://web.staging.chat2desk.com'
             var secretKey = getParameterByName('hash');
 
             if (secretKey) {
@@ -266,7 +266,8 @@
                         email: $('#email').val(),
                         company_name: $('#name').val(),
                         password_confirmation: $('#confirm-password').val(),
-                        password: $('#password').val()
+                        password: $('#password').val(),
+                        partid: getParameterByName('partid')
                     }),
                     success: function (response) {
                         if (response.status === 'success') {
@@ -363,6 +364,10 @@
                 $("#reset-password-form").delay(100).fadeToggle(100);
                 e.preventDefault();
             });
+
+            if (window.location.pathname === '/register') {
+                $('#register-form-link').click()
+            }
 
         });
     })
